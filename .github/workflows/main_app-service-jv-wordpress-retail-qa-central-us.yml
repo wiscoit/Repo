@@ -10,36 +10,36 @@ on:
   workflow_dispatch:
 
 jobs:
-#  build:
-#    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-#    steps:
-#      - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
 
-#      - name: Setup PHP
-#        uses: shivammathur/setup-php@v2
-#        with:
-#          php-version: '8.0'
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
 
-#      - name: Check if composer.json exists
-#        id: check_files
-#        uses: andstor/file-existence-action@v1
-#        with:
-#          files: 'composer.json'
+      - name: Check if composer.json exists
+        id: check_files
+        uses: andstor/file-existence-action@v1
+        with:
+          files: 'composer.json'
 
-#      - name: Run composer install if composer.json exists
-#        if: steps.check_files.outputs.files_exists == 'true'
-#        run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
+      - name: Run composer install if composer.json exists
+        if: steps.check_files.outputs.files_exists == 'true'
+        run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
 
-#      - name: Upload artifact for deployment job
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: php-app
-#          path: .
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: php-app
+          path: .
 
   deploy:
     runs-on: ubuntu-latest
-#    needs: build
+    needs: build
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
@@ -50,15 +50,11 @@ jobs:
         with:
           name: php-app
 
-# checkout the repo
-      - name: 'Chechout Github Action'
-        uses: actions/checkout@master
-        
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
           app-name: 'App-Service-JV-Wordpress-Retail-QA-Central-US'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_75D6DAE3025C40849E202F09F5730322 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A17DAD97DA3242769B2D54A78ECEFAC0 }}
           package: .
