@@ -1,12 +1,12 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy PHP app to Azure Web App - App-Service-JV-Wordpress-SSR-Central-US
+name: Build and deploy PHP app to Azure Web App - App-Service-JV-Wordpress-Canada-QA-Central-US
 
 on:
   push:
     branches:
-      - Prod
+      - main
   workflow_dispatch:
 
 jobs:
@@ -19,7 +19,7 @@ jobs:
 #      - name: Setup PHP
 #        uses: shivammathur/setup-php@v2
 #        with:
-#          php-version: '8.1'
+#          php-version: '8.0'
 
 #      - name: Check if composer.json exists
 #        id: check_files
@@ -50,15 +50,15 @@ jobs:
 #        with:
 #          name: php-app
 
-#   checkout the repo
-        - name: 'Checkout Github Action'
-          uses: actions/checkout@master
+# checkout the repo
+      - name: 'Checkout Github Action'
+        uses: actions/checkout@master
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: 'App-Service-JV-Wordpress-SSR-Central-US'
+          app-name: 'App-Service-JV-Wordpress-Canada-QA-Central-US'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_65796B3C812A4A54B8178806BECA7B6C }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6FEA6EC5299343DEABC32F3E10CC007D }}
           package: .
