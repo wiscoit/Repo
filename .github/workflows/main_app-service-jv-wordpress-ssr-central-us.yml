@@ -51,7 +51,7 @@ jobs:
 #          name: php-app
 
 #   checkout the repo
-      - names: 'Checkout Github Action'
+      - name: 'Checkout Github Action'
         uses: actions/checkout@master
 
       - name: 'Deploy to Azure Web App'
