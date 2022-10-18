@@ -6,7 +6,7 @@ name: Build and deploy PHP app to Azure Web App - App-Service-JV-Wordpress-SSR-C
 on:
   push:
     branches:
-      - Prd
+      - Master
   workflow_dispatch:
 
 jobs:
