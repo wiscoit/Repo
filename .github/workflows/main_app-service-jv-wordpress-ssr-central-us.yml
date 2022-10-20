@@ -56,5 +56,5 @@ jobs:
         with:
           app-name: 'App-Service-JV-Wordpress-SSR-Central-US'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C465A7241D91483386D76F173B6FAB9E }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EAF48C7B8323460DB388CCBC6D41D6EE }}
           package: .
