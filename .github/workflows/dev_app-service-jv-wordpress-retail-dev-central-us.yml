@@ -6,7 +6,7 @@ name: Build and deploy PHP app to Azure Web App - App-Service-JV-Wordpress-Retai
 on:
   push:
     branches:
-      - Dev
+      - Main
   workflow_dispatch:
 
 jobs:
@@ -50,7 +50,7 @@ jobs:
 #        with:
 #          name: php-app
 
-    # checkout the repo
+#    checkout the repo
       - name: 'Checkout Github Action'
       - uses: actions/checkout@master
       
