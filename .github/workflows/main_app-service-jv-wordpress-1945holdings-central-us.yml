@@ -55,6 +55,10 @@ jobs:
 
     #  - name: Unzip artifact for deployment
     #    run: unzip release.zip
+
+    # checkout the repo
+      - name: 'Checkout Github Action'
+        uses: actions/checkout@master
       
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
