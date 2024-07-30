@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy PHP app to Azure Web App - App-Service-JV-Wordpress-1945Holdings-QA-Central-US
+name: Build and deploy PHP app to Azure Web App - App-Service-JV-Wordpress-1945Holdings-Central-US
 
 on:
   push:
@@ -10,57 +10,62 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+#  build:
+#    runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4
+#    steps:
+#      - uses: actions/checkout@v4
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.3'
+#      - name: Setup PHP
+#        uses: shivammathur/setup-php@v2
+#        with:
+#          php-version: '8.0'
 
-      - name: Check if composer.json exists
-        id: check_files
-        uses: andstor/file-existence-action@v1
-        with:
-          files: 'composer.json'
+#      - name: Check if composer.json exists
+#        id: check_files
+#        uses: andstor/file-existence-action@v1
+#        with:
+#          files: 'composer.json'
 
-      - name: Run composer install if composer.json exists
-        if: steps.check_files.outputs.files_exists == 'true'
-        run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
+#      - name: Run composer install if composer.json exists
+#        if: steps.check_files.outputs.files_exists == 'true'
+#        run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
 
-      - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+#      - name: Zip artifact for deployment
+#        run: zip release.zip ./* -r
 
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v4
-        with:
-          name: php-app
-          path: release.zip
+#      - name: Upload artifact for deployment job
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: php-app
+#          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build
+#    needs: build
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     
     steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v4
-        with:
-          name: php-app
+#      - name: Download artifact from build job
+#        uses: actions/download-artifact@v3
+#        with:
+#          name: php-app
 
-      - name: Unzip artifact for deployment
-        run: unzip release.zip
+#      - name: Unzip artifact for deployment
+#        run: unzip release.zip
+      
+    # checkout the repo
+      - name: 'Checkout Github Action'
+        uses: actions/checkout@master
+                
       
       - name: 'Deploy to Azure Web App'
-        uses: azure/webapps-deploy@v3
+        uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: 'App-Service-JV-Wordpress-1945Holdings-QA-Central-US'
+          app-name: 'App-Service-JV-Wordpress-1945Holdings-qa-Central-US'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2AA6BA4FA5D44D32ADF475B48C9E27EF }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AF507B795E4145B0A22B9C58AB29BA5D }}
